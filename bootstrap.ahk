@@ -30,6 +30,6 @@ sc2E:: Spheres.prepare("exort")
 
 sc27:: Multicast.use_4()
 XButton2:: Multicast.use_3()
-XButton1:: Multicast.use_123()
+XButton1:: Multicast.use_12334q5345q34()
 
 #HotIf
