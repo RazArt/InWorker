@@ -4,11 +4,13 @@ from win32gui import GetForegroundWindow
 from win32process import GetWindowThreadProcessId
 from psutil import Process
 
-import keyboard
-
 import InWorker.screen_scan as screen_scan
 import InWorker.hotkeys as hotkeys
 import InWorker.spheres as spheres
+import InWorker.spells as spells
+
+import keyboard
+import InWorker.config as config
 
 _runing = False
 _thread = None

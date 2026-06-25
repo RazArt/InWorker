@@ -13,20 +13,23 @@ key_binds = {
     'item_4': 47,
     'item_5': 48,
     'item_6': 49,
-    'preparation_cast_mode': 43,
+    'preparation_cast_mode': 57,
     'actions_lock_1': 42,
     'actions_lock_2': 29
 }
 
 hotkeys = {
-    16: (user_actions.press_q, True),
-    17: (user_actions.press_w, True),
-    18: (user_actions.press_e, True),
-    19: (user_actions.press_r, True),
-    20: (user_actions.press_t, True),
-    50: (user_actions.press_m, True),
-    2: (user_actions.press_1, True),
-    3: (user_actions.press_2, True),
-    4: (user_actions.press_3, True),
-    5: (user_actions.press_4, True)
+    16: (user_actions.use_cold_snap, True),
+    17: (user_actions.use_sun_strike, True),
+    18: (user_actions.use_multicast_3, True),
+    19: (user_actions.use_multicast_2, True),
+    20: (user_actions.use_multicast_4, True),
+    50: (user_actions.use_multicast_1, True),
+    44: (user_actions.use_multicast_2, True),
+    45: (user_actions.use_multicast_3, True),
+    46: (user_actions.use_multicast_4, True),
+    2: (user_actions.use_ice_wall, True),
+    3: (user_actions.use_tornado, True),
+    4: (user_actions.use_alacrity, True),
+    5: (user_actions.use_forge_spirit, True)
 }

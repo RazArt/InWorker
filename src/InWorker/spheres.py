@@ -67,6 +67,14 @@ def init():
     _update()
 
 
+def is_use_availability():
+    if (hotkeys.get_key_state(config.key_binds['actions_lock_1']) or
+            hotkeys.get_key_state(config.key_binds['actions_lock_2'])):
+        return False
+
+    return True
+
+
 def _update():
     global _selected, _availability
     position = 0
@@ -113,13 +121,14 @@ def prepare(spellname):
     spellname = "emp" if (spellname == "wex") else spellname
     spellname = "sun_strike" if (spellname == "exort") else spellname
 
+    if not (is_use_availability()):
+        return False
+
     if (get_prepared_spellname() == spellname):
         return True
 
     if (_preparation):
         return False
-
-    _preparation = True
 
     for sphere_name in _structures[spellname]:
         if (_structures[spellname][sphere_name] > 0):
@@ -127,8 +136,11 @@ def prepare(spellname):
                 _preparation = False
                 return False
 
+    _preparation = True
+
     spheres = {}
     spheres['names'] = _selected['names'].copy()
+
     for index in range(3):
         del spheres['names'][index]
         spheres['counts'] = {'quas': 0, 'wex': 0, 'exort': 0}
@@ -145,7 +157,7 @@ def prepare(spellname):
         if (index == (sum(spheres['difference'].values()) - 1)):
             for sphere_name, count in spheres['difference'].items():
                 for _ in range(count):
-                    hotkeys.send_key(config.key_binds[sphere_name])
+                    hotkeys.key_send(config.key_binds[sphere_name])
             _preparation = False
             return True
 
