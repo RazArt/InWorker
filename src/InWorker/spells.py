@@ -22,7 +22,6 @@ def _update():
         'forge_spirit': ((35, 49, 64), (63, 69, 74)),
         'chaos_meteor': ((172, 92, 5), (86, 79, 79))
     }
-
     pixel_colors = screen_scan.get_pixel_colors()[15:17]
 
     for index in range(2):
@@ -35,15 +34,8 @@ def init():
     global _selected, _invoke_cooldown
     _selected = {0: '', 1: ''}
     _invoke_cooldown = False
+
     _update()
-
-
-def is_use_availability():
-    if (hotkeys.get_key_state(config.key_binds['actions_lock_1']) or
-            hotkeys.get_key_state(config.key_binds['actions_lock_2'])):
-        return False
-
-    return True
 
 
 def is_preparation():
@@ -51,9 +43,6 @@ def is_preparation():
 
 
 def use_invoke():
-    if not (is_use_availability()):
-        return False
-
     if (screen_scan.get_pixel_colors()[17] != (240, 160, 37)):
         return False
 
@@ -62,9 +51,6 @@ def use_invoke():
 
 
 def prepare(spellname):
-    if not (is_use_availability()):
-        return False
-
     if (spheres.prepare(spellname) == False or use_invoke() == False):
         return False
 
@@ -72,9 +58,6 @@ def prepare(spellname):
 
 
 def prepare_multicast(spellname_1, spellname_2, spellname_3=''):
-    if not (is_use_availability()):
-        return False
-
     _update()
 
     if ((_selected[0] == spellname_1 and _selected[1] == spellname_2) or
@@ -97,13 +80,8 @@ def prepare_multicast(spellname_1, spellname_2, spellname_3=''):
     if (spellname_3):
         spheres.prepare(spellname_3)
 
-    return
-
 
 def use(spellname):
-    if not (is_use_availability()):
-        return False
-
     _update()
 
     if (is_preparation()):
@@ -144,8 +122,5 @@ def use(spellname):
 
 
 def use_item(item_num):
-    if not (is_use_availability()):
-        return False
-
     hotkeys.key_send(config.key_binds['item_' + str(item_num)])
-    return
+    return True

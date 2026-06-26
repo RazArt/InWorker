@@ -64,6 +64,7 @@ def init():
     _selected = {'names': {0: '', 1: '', 2: ''}, 'count': {'quas': 0, 'wex': 0, 'exort': 0}}
     _availability = {'quas': False, 'wex': False, 'exort': False}
     _preparation = False
+
     _update()
 
 
@@ -79,7 +80,7 @@ def _update():
     global _selected, _availability
     position = 0
     pixel_colors = screen_scan.get_pixel_colors()[:15]
-
+    print(f'{pixel_colors[:4]=}')
     for color in pixel_colors[:12]:
         if (color == (40, 122, 175)):
             _selected['names'][position] = 'quas'
@@ -106,6 +107,7 @@ def _update():
 
 def get_prepared_spellname():
     _update()
+    print(f'{_selected=}')
     for spellname in _structures:
         if ((_selected['count']['quas'] == _structures[spellname]['quas']) and
             (_selected['count']['wex'] == _structures[spellname]['wex']) and
@@ -120,10 +122,7 @@ def prepare(spellname):
     spellname = "cold_snap" if (spellname == "quas") else spellname
     spellname = "emp" if (spellname == "wex") else spellname
     spellname = "sun_strike" if (spellname == "exort") else spellname
-
-    if not (is_use_availability()):
-        return False
-
+    print(get_prepared_spellname())
     if (get_prepared_spellname() == spellname):
         return True
 

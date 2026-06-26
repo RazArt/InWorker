@@ -19,17 +19,20 @@ key_binds = {
 }
 
 hotkeys = {
-    16: (user_actions.use_cold_snap, True),
-    17: (user_actions.use_sun_strike, True),
-    18: (user_actions.use_multicast_3, True),
-    19: (user_actions.use_multicast_2, True),
-    20: (user_actions.use_multicast_4, True),
-    50: (user_actions.use_multicast_1, True),
-    44: (user_actions.use_multicast_2, True),
-    45: (user_actions.use_multicast_3, True),
-    46: (user_actions.use_multicast_4, True),
-    2: (user_actions.use_ice_wall, True),
-    3: (user_actions.use_tornado, True),
-    4: (user_actions.use_alacrity, True),
-    5: (user_actions.use_forge_spirit, True)
+    16: (user_actions.use_cold_snap, True),  # Q
+    17: (user_actions.use_sun_strike, True),  # W
+    18: (user_actions.use_multicast_3, True),  # E
+    19: (user_actions.use_multicast_2, True),  # R
+    20: (user_actions.use_multicast_4, True),  # T
+    50: (user_actions.use_multicast_1, True),  # M
+    44: (user_actions.use_quas, True),  # Z
+    45: (user_actions.use_wex, True),  # X
+    46: (user_actions.use_exort, True),  # C
+    25: (user_actions.use_multicast_2, True),  # P
+    26: (user_actions.use_multicast_3, True),  # {
+    27: (user_actions.use_multicast_4, True),  # }
+    2: (user_actions.use_ice_wall, True),  # 1
+    3: (user_actions.use_tornado, True),  # 2
+    4: (user_actions.use_alacrity, True),  # 3
+    5: (user_actions.use_forge_spirit, True)  # 4
 }

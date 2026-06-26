@@ -1,22 +1,20 @@
 from time import sleep
 
-import InWorker.hotkeys as hotkeys
 import InWorker.spheres as spheres
 import InWorker.spells as spells
 import InWorker.screen_scan as screen_scan
 
-spells_colors = {
-    'cold_snap': ((19, 36, 149), (80, 85, 107)),
-    'ghost_walk': ((5, 13, 32), (60, 66, 71)),
-    'ice_wall': ((168, 208, 236), (123, 136, 147)),
-    'emp': ((43, 3, 48), (96, 82, 105)),
-    'tornado': ((2, 44, 75), (68, 78, 88)),
-    'alacrity': ((52, 24, 23), (63, 66, 71)),
-    'deafening_blast': ((27, 69, 124), (75, 83, 99)),
-    'sun_strike': ((242, 213, 109), (147, 140, 117)),
-    'forge_spirit': ((35, 49, 64), (63, 69, 74)),
-    'chaos_meteor': ((172, 92, 5), (86, 79, 79))
-}
+
+def use_quas():
+    spheres.prepare('quas')
+
+
+def use_wex():
+    spheres.prepare('wex')
+
+
+def use_exort():
+    spheres.prepare('exort')
 
 
 def use_cold_snap():
@@ -61,7 +59,7 @@ def use_chaos_meteor():
 
 def use_multicast_1():
     pixel_colors = screen_scan.get_pixel_colors()[18:20]
-    print(f'{pixel_colors=}')
+
     if (pixel_colors[0] == (78, 88, 101) or pixel_colors[1] == (78, 88, 101)):
         spells.use('ice_wall')
     else:

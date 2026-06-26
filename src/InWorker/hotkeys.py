@@ -2,11 +2,13 @@ from threading import Thread
 import keyboard
 from time import sleep
 from random import randint
+import InWorker.spells as spells
 
 import InWorker.config as config
 
 _running = False
 _hotkey_pressed = {}
+_treads = {}
 
 
 def _check_key_state():
@@ -18,9 +20,10 @@ def _check_key_state():
                 _hotkey_pressed[hotkey] = False
 
             if (get_key_state(hotkey) and _hotkey_pressed[hotkey] == False):
+                print(f'{hotkey=} pressed')
                 _hotkey_pressed[hotkey] = True
-                properties[0]()
-        sleep(0.01)
+                Thread(target=properties[0], daemon=True).start()
+        sleep(0.05)
 
 
 def start():
@@ -36,9 +39,8 @@ def start():
 
 
 def stop():
-    global _running, _hotkey_pressed
+    global _running
     _running = False
-    _hotkey_pressed = dict()
 
     for hotkey in config.hotkeys:
         keyboard.unblock_key(hotkey)
@@ -49,7 +51,16 @@ def get_key_state(scan_code):
 
 
 def key_send(scan_code):
-    sleep(randint(140, 200) / 1000)
+    sleep(randint(100, 200) / 1000)
+    if (_running == False):
+        return
+
+    if (get_key_state(config.key_binds['actions_lock_1'])):
+        return
+
+    if (get_key_state(config.key_binds['actions_lock_2'])):
+        return
+
     keyboard.send(scan_code)
 
 
