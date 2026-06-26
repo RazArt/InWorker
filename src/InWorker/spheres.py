@@ -68,19 +68,11 @@ def init():
     _update()
 
 
-def is_use_availability():
-    if (hotkeys.get_key_state(config.key_binds['actions_lock_1']) or
-            hotkeys.get_key_state(config.key_binds['actions_lock_2'])):
-        return False
-
-    return True
-
-
 def _update():
     global _selected, _availability
     position = 0
     pixel_colors = screen_scan.get_pixel_colors()[:15]
-    print(f'{pixel_colors[:4]=}')
+
     for color in pixel_colors[:12]:
         if (color == (40, 122, 175)):
             _selected['names'][position] = 'quas'
@@ -107,7 +99,6 @@ def _update():
 
 def get_prepared_spellname():
     _update()
-    print(f'{_selected=}')
     for spellname in _structures:
         if ((_selected['count']['quas'] == _structures[spellname]['quas']) and
             (_selected['count']['wex'] == _structures[spellname]['wex']) and
@@ -122,7 +113,7 @@ def prepare(spellname):
     spellname = "cold_snap" if (spellname == "quas") else spellname
     spellname = "emp" if (spellname == "wex") else spellname
     spellname = "sun_strike" if (spellname == "exort") else spellname
-    print(get_prepared_spellname())
+
     if (get_prepared_spellname() == spellname):
         return True
 

@@ -33,7 +33,7 @@ def start():
     global _running
     _running = True
 
-    Thread(target=update_info).start()
+    Thread(target=update_info, daemon=True).start()
 
 
 def stop():
@@ -45,4 +45,4 @@ def get_pixel_colors():
     if (_pixel_colors):
         return _pixel_colors
     else:
-        return [(0, 0, 0)] * 20
+        return [(0, 0, 0)] * 25

@@ -16,9 +16,8 @@ def check_active_process():
     global _runing
 
     while True:
-        process_name = ''
         try:
-            process_name = Process(GetWindowThreadProcessId(GetForegroundWindow())[1]).name()
+            process_name = Process(GetWindowThreadProcessId(GetForegroundWindow())[1]).name().lower()
         except:
             process_name = ''
 
@@ -37,11 +36,4 @@ def check_active_process():
         sleep(0.2)
 
 
-def start():
-    global _runing
-    _runing = False
-
-    Thread(target=check_active_process).start()
-
-
-start()
+Thread(target=check_active_process).start()
