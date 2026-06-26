@@ -8,6 +8,7 @@ import InWorker.screen_scan as screen_scan
 import InWorker.hotkeys as hotkeys
 import InWorker.spheres as spheres
 import InWorker.spells as spells
+import InWorker.user_actions as user_actions
 
 _runing = False
 
@@ -27,11 +28,13 @@ def check_active_process():
             hotkeys.start()
             spheres.init()
             spells.init()
+            user_actions.start()
             print('Start')
         elif (process_name != 'dota2.exe' and _runing == True):
             _runing = False
             screen_scan.stop()
             hotkeys.stop()
+            user_actions.stop()
             print('Stop')
         sleep(0.2)
 

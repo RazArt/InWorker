@@ -14,11 +14,13 @@ key_binds = {
     'item_5': 48,
     'item_6': 49,
     'preparation_cast_mode': 57,
-    'actions_exit_1': 42,
-    'actions_exit_2': 29
+    'actions_exit': (42, 29)
 }
 
 user_hotkeys = {
+    # 16: (user_actions.test_1, True),  # Q
+    # 17: (user_actions.test_2, True),  # W
+    # 18: (user_actions.test_3, True),  # E
     16: (user_actions.use_cold_snap, True),  # Q
     17: (user_actions.use_sun_strike, True),  # W
     18: (user_actions.use_multicast_3, True),  # E

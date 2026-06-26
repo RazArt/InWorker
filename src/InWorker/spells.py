@@ -81,15 +81,14 @@ def prepare_multicast(spellname_1, spellname_2, spellname_3=''):
         spheres.prepare(spellname_3)
 
 
-def use(spellname):
+def use(spellname, preparation_mode=False):
     _update()
 
-    if (is_preparation()):
+    if (preparation_mode):
         if ((_selected[0] == spellname)):
             return True
         else:
             return prepare(spellname)
-
     else:
         if (_selected[0] == spellname):
             hotkeys.key_press(56)

@@ -4,7 +4,6 @@ import InWorker.config as config
 
 _selected = {'names': {0: '', 1: '', 2: ''}, 'count': {'quas': 0, 'wex': 0, 'exort': 0}}
 _availability = {'quas': False, 'wex': False, 'exort': False}
-_preparation = False
 _structures = {
     'cold_snap': {
         'quas': 3,
@@ -117,16 +116,10 @@ def prepare(spellname):
     if (get_prepared_spellname() == spellname):
         return True
 
-    if (_preparation):
-        return False
-
     for sphere_name in _structures[spellname]:
         if (_structures[spellname][sphere_name] > 0):
             if (_availability[sphere_name] == False):
-                _preparation = False
                 return False
-
-    _preparation = True
 
     spheres = {}
     spheres['names'] = _selected['names'].copy()
@@ -148,8 +141,6 @@ def prepare(spellname):
             for sphere_name, count in spheres['difference'].items():
                 for _ in range(count):
                     hotkeys.key_send(config.key_binds[sphere_name])
-            _preparation = False
             return True
 
-    _preparation = False
     return True
