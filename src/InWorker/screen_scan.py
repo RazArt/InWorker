@@ -15,6 +15,18 @@ _coordinates = {
 _pixel_colors = []
 
 
+def start():
+    global _running
+    _running = True
+
+    Thread(target=update_info, daemon=True).start()
+
+
+def stop():
+    global _running
+    _running = False
+
+
 def update_info():
     global _pixel_colors
 
@@ -29,20 +41,5 @@ def update_info():
             sleep(0.05)
 
 
-def start():
-    global _running
-    _running = True
-
-    Thread(target=update_info, daemon=True).start()
-
-
-def stop():
-    global _running
-    _running = False
-
-
 def get_pixel_colors():
-    if (_pixel_colors):
-        return _pixel_colors
-    else:
-        return [(0, 0, 0)] * 25
+    return _pixel_colors if (_pixel_colors) else [(0, 0, 0)] * 25

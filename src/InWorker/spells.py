@@ -1,12 +1,9 @@
-from time import sleep
-
 import InWorker.screen_scan as screen_scan
 import InWorker.hotkeys as hotkeys
 import InWorker.config as config
 import InWorker.spheres as spheres
 
 _selected = {0: '', 1: ''}
-_invoke_cooldown = False
 
 
 def _update():
@@ -31,15 +28,10 @@ def _update():
 
 
 def init():
-    global _selected, _invoke_cooldown
+    global _selected
     _selected = {0: '', 1: ''}
-    _invoke_cooldown = False
 
     _update()
-
-
-def is_preparation():
-    return hotkeys.get_key_state(config.key_binds['preparation_cast_mode'])
 
 
 def use_invoke():
@@ -91,30 +83,18 @@ def use(spellname, preparation_mode=False):
             return prepare(spellname)
     else:
         if (_selected[0] == spellname):
-            hotkeys.key_press(56)
-            hotkeys.key_send(config.key_binds['spell_1'])
-            hotkeys.key_release(56)
-            hotkeys.key_send(config.key_binds['spell_1'])
+            hotkeys.key_send_alt(config.key_binds['spell_1'])
             return True
         elif (_selected[1] == spellname):
-            hotkeys.key_press(56)
-            hotkeys.key_send(config.key_binds['spell_2'])
-            hotkeys.key_release(56)
-            hotkeys.key_send(config.key_binds['spell_2'])
+            hotkeys.key_send_alt(config.key_binds['spell_2'])
             return True
         elif (spheres.get_prepared_spellname() == spellname):
             if (use_invoke() == True):
-                hotkeys.key_press(56)
-                hotkeys.key_send(config.key_binds['spell_1'])
-                hotkeys.key_release(56)
-                hotkeys.key_send(config.key_binds['spell_1'])
+                hotkeys.key_send_alt(config.key_binds['spell_1'])
                 return True
             return False
         elif (prepare(spellname)):
-            hotkeys.key_press(56)
-            hotkeys.key_send(config.key_binds['spell_1'])
-            hotkeys.key_release(56)
-            hotkeys.key_send(config.key_binds['spell_1'])
+            hotkeys.key_send_alt(config.key_binds['spell_1'])
             return True
 
     return False

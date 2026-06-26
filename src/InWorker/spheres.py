@@ -59,10 +59,9 @@ _structures = {
 
 
 def init():
-    global _selected, _availability, _preparation
+    global _selected, _availability
     _selected = {'names': {0: '', 1: '', 2: ''}, 'count': {'quas': 0, 'wex': 0, 'exort': 0}}
     _availability = {'quas': False, 'wex': False, 'exort': False}
-    _preparation = False
 
     _update()
 
@@ -108,7 +107,6 @@ def get_prepared_spellname():
 
 
 def prepare(spellname):
-    global _preparation
     spellname = "cold_snap" if (spellname == "quas") else spellname
     spellname = "emp" if (spellname == "wex") else spellname
     spellname = "sun_strike" if (spellname == "exort") else spellname
@@ -134,8 +132,8 @@ def prepare(spellname):
                 spheres['counts'][name] += 1
 
         for sphere_name in spheres['difference']:
-            count = _structures[spellname][sphere_name] - spheres['counts'][sphere_name]
-            spheres['difference'][sphere_name] = count if (count > 0) else 0
+            difference = _structures[spellname][sphere_name] - spheres['counts'][sphere_name]
+            spheres['difference'][sphere_name] = difference if (difference > 0) else 0
 
         if (index == (sum(spheres['difference'].values()) - 1)):
             for sphere_name, count in spheres['difference'].items():

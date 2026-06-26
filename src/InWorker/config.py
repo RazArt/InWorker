@@ -18,9 +18,6 @@ key_binds = {
 }
 
 user_hotkeys = {
-    # 16: (user_actions.test_1, True),  # Q
-    # 17: (user_actions.test_2, True),  # W
-    # 18: (user_actions.test_3, True),  # E
     16: (user_actions.use_cold_snap, True),  # Q
     17: (user_actions.use_sun_strike, True),  # W
     18: (user_actions.use_multicast_3, True),  # E

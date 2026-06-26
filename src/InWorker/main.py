@@ -29,13 +29,11 @@ def check_active_process():
             spheres.init()
             spells.init()
             user_actions.start()
-            print('Start')
         elif (process_name != 'dota2.exe' and _runing == True):
             _runing = False
             screen_scan.stop()
             hotkeys.stop()
             user_actions.stop()
-            print('Stop')
         sleep(0.2)
 
 

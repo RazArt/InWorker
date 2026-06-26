@@ -5,17 +5,15 @@ from time import sleep
 import InWorker.spheres as spheres
 import InWorker.spells as spells
 import InWorker.screen_scan as screen_scan
-import InWorker.hotkeys as hotkeys
 
 _tasks_queue = None
 _running = False
-_stop_tasks_queue = False
 
 
 def start():
     global _running, _tasks_queue
     _running = True
-    _tasks_queue = queue.Queue(maxsize=100)
+    _tasks_queue = queue.Queue(maxsize=30)
     Thread(target=do_tasks, daemon=True).start()
 
 
@@ -30,9 +28,7 @@ def do_tasks():
     while _running == True:
         try:
             task = _tasks_queue.get()
-            print(f'Начали задачу {task=}')
             task[0](task[1])
-            print(f'Выполнили задачу {task=}')
             _tasks_queue.task_done()
         finally:
             sleep(0.05)
@@ -41,7 +37,6 @@ def do_tasks():
 def add_task(task, preparation_mode):
     try:
         _tasks_queue.put((task, preparation_mode))
-        print(f'Задача {task=} поставлена в очередь')
     except queue.Full:
         return
 
@@ -51,9 +46,8 @@ def clear_task_queue():
         try:
             _tasks_queue.get(block=False)
             _tasks_queue.task_done()
-        except queue.Empty:
+        except:
             continue
-    print(f'Очередь задач очищена')
 
 
 def use_quas(preparation_mode):

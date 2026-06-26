@@ -1,5 +1,4 @@
 import keyboard
-import queue
 from threading import Thread
 from time import sleep
 from random import randint
@@ -17,7 +16,6 @@ def start():
 
     for hotkey in config.key_binds['actions_exit']:
         _hotkey_pressed[hotkey] = False
-
     for hotkey, properties in config.user_hotkeys.items():
         _hotkey_pressed[hotkey] = False
         if (properties[1]):
@@ -50,10 +48,9 @@ def _check_key_state():
                 _hotkey_pressed[hotkey] = False
             if (get_key_state(hotkey) and _hotkey_pressed[hotkey] == False):
                 _hotkey_pressed[hotkey] = True
-                Thread(target=user_actions.add_task(properties[0],
-                                                    get_key_state(config.key_binds['preparation_cast_mode'])),
+                Thread(target=user_actions.add_task,
+                       args=(properties[0], get_key_state(config.key_binds['preparation_cast_mode'])),
                        daemon=True).start()
-                # Thread(target=user_actions.add_task, args=(properties[0]), daemon=True).start()
         sleep(0.05)
 
 
@@ -65,15 +62,13 @@ def key_send(scan_code):
     for hotkey in config.key_binds['actions_exit']:
         if (get_key_state(hotkey)):
             return
-    # sleep(randint(100, 200) / 1000)
     keyboard.send(scan_code)
     sleep(randint(100, 200) / 1000)
 
 
-def key_press(scan_code):
-    sleep(0.05)
-    keyboard.press(scan_code)
-
-
-def key_release(scan_code):
-    keyboard.release(scan_code)
+def key_send_alt(scan_code):
+    keyboard.press(56)
+    keyboard.send(scan_code)
+    keyboard.release(56)
+    keyboard.send(scan_code)
+    sleep(randint(100, 200) / 1000)
